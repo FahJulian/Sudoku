@@ -1,17 +1,24 @@
 #pragma once
 
+
 class Board
 {
 private:
-    int m_Board[9 * 9];
+    int m_Data[9 * 9];
 public:
-    Board() : m_Board{ 0 } {}
+    Board() : m_Data{ 0 } {}
+    Board(int data[81]);
+
     const bool SetCell(int cellIdx, int value);
-    const bool IsFree(int cellIdx, int value) const;
-    const int* GetRow(int n) const;
-    const int* GetCol(int n) const;
-    const int* GetBox(int n) const;
+    bool Solve();
+    void Print() const;
 
 private:
+    bool IsPossible(int cellIdx, int value) const;
+    int NextEmptyCell() const;
+    const int* GetRow(int n, int* row) const;
+    const int* GetCol(int n, int* col) const;
+    const int* GetBox(int n, int* box) const;
+
     static int BoxOf(int cellIdx);
 };
